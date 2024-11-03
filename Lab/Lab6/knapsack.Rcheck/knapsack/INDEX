@@ -1,0 +1,6 @@
+brute_force_knapsack    using brute force algorithm to solve knapsack
+                        problem
+greedy_knapsack         using greedy algorithm to solve knapsack
+                        problem
+knapsack-package        Lab 6 of Advanced Programming in R
+knapsack_dynamic        using DP algorithm to solve knapsack problem

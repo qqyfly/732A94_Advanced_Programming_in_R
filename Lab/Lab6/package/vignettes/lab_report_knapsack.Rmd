@@ -1,0 +1,77 @@
+---
+title: "lab report knapsack"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{lab report knapsack}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+# Overview
+
+The `knapsack` package provides three exported functions to solve solve knapsack problem. An extra Rcpp version of brute_force_knapsack also provided.
+
+# Installation
+
+To install the `knapsack` package, use the following commands:
+
+```{r install-linreg-package, eval=FALSE}
+devtools::install_github("qqyfly/732A94_Advanced_Programming_in_R_Lab6", build_vignettes = TRUE)
+```
+
+## Load required libraries
+
+In this step, we need to load the installed library `knapsack`. The code is showed below.
+
+```{r}
+library(knapsack)
+```
+
+# Load the test data
+
+Some test data is needed to execute the function.
+
+```{r}
+suppressWarnings(RNGversion(min(as.character(getRversion()),"3.5.3")))
+set.seed(42, kind = "Mersenne-Twister", normal.kind = "Inversion")
+n <- 2000
+knapsack_objects <- data.frame(
+  w=sample(1:4000, size = n, replace = TRUE),
+  v=runif(n = n, 0, 10000)
+)
+```
+
+## brute force knapsack R version
+```{r}
+brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500)
+```
+
+
+##  dynamic knapsack
+```{r}
+knapsack_dynamic(x = knapsack_objects[1:8,], W = 2000)
+```
+
+## greedy knapsack
+```{r}
+greedy_knapsack(x = knapsack_objects[1:8,], W = 3500)
+```
+
+## Questions and Answers
+Question for Brute force search: How much time does it takes to run the algorithm for n = 16 objects?
+```{r}
+system.time(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500))
+```
+
+Question for Greedy heuristic: How much time does it takes to run the algorithm for n = 500 objects?
+```{r}
+system.time(knapsack_dynamic(x = knapsack_objects[1:500,], W = 3500))
+```
+
+Question for Greedy heuristic: How much time does it takes to run the algorithm for n = 1000000 objects?
+```{r}
+system.time(greedy_knapsack(x = knapsack_objects[1:1000000,], W = 3500))
+```
+
+Question after profile: What performance gain could you get by trying to improving your code?
+
+Answer: We can  use C++ to rewrite the code to get huge improvement.

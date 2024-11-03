@@ -1,0 +1,5 @@
+knapsack-package	knapsack-package
+brute_force_knapsack	brute_force_knapsack
+greedy_knapsack	greedy_knapsack
+knapsack	knapsack-package
+knapsack_dynamic	knapsack_dynamic
